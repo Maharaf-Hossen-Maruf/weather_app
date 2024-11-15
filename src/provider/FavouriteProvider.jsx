@@ -1,14 +1,14 @@
 import { FavouriteContext } from "../context"
 import { useLocalStorage } from "../hooks"
 
-const FavourtieProvider = ({Children}) => {
+const FavourtieProvider = ({children}) => {
     const [favroites,setFavroites] =  useLocalStorage('favroites',[])
 
     const addToFavourites = (latitude,longitude,location) => {
         setFavroites(
-            ...favroites,
+            [...favroites,
             {latitude:latitude,longitude:longitude,location:location}
-        )
+        ])
     }
 
     const removeFromFavouites = (location)=>{
@@ -17,10 +17,11 @@ const FavourtieProvider = ({Children}) => {
         )
         setFavroites(restFavourites)
     }
-
+    // console.log(<div><h2>rafee testing</h2></div>);
+    
     return(
         <FavouriteContext.Provider value={{addToFavourites,removeFromFavouites,favroites}}>
-            {Children}
+            {children}
         </FavouriteContext.Provider>
     )
 }
